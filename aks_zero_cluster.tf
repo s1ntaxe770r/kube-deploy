@@ -9,15 +9,15 @@ module "aks_zero" {
       # e.g. name_prefix = kbst becomes: `kbst-apps-eu-west-1`
       # for small orgs the name works well
       # for bigger orgs consider department or team names
-      name_prefix = ""
+      name_prefix = "kbst"
 
       # Set the base_domain used to generate the FQDN of the cluster
       # [cluster_name].[provider_name].[base_domain]
       # e.g. kbst-apps-eu-west-1.aws.infra.example.com
-      base_domain = ""
+      base_domain = "jubril.me"
 
       # The Azure resource group to use
-      resource_group = ""
+      resource_group = "kbst"
 
       # CNI/Advanced networking configuration parameters.
       # Leave commented for default 'kubenet' networking
