@@ -39,3 +39,46 @@ module "aks_zero" {
     loc = {}
   }
 }
+
+
+
+module "nginx_ingress" {
+  providers = {
+    kustomization = kustomization.example
+  }
+  source  = "kbst.xyz/catalog/nginx/kustomization"
+  version = "0.48.1-kbst.0"
+  configuration = {
+    apps = {}
+    ops = {}
+    loc = {}
+  }
+}
+
+
+
+
+module "custom_manifests" {
+  providers = {
+    kustomization = kustomization.example
+  }
+  source  = "kbst.xyz/catalog/custom-manifests/kustomization"
+  version = "0.1.0"
+  configuration = {
+    apps = {
+      namespace = "apps-${terraform.workspace}"
+      resources = [
+        "${path.root}/manifests/apps/deployment.yaml",
+        "${path.root}/manifests/apps/service.yaml",
+        "${path.root}/manifests/apps/ingress.yaml"
+
+      ]
+      common_labels = {
+        "env" = terraform.workspace
+      }
+    }
+    ops = {}
+    loc = {}
+  }
+}
+
