@@ -40,18 +40,18 @@ module "aks_zero" {
   }
 }
 
-module "nginx_ingress" {
-  providers = {
-    kustomization = kustomization.aks_zero
-  }
-  source  = "kbst.xyz/catalog/nginx/kustomization"
-  version = "0.48.1-kbst.0"
-  configuration = {
-    apps = {}
-    ops = {}
-    loc = {}
-  }
-}
+# module "nginx_ingress" {
+#   providers = {
+#     kustomization = kustomization.aks_zero
+#   }
+#   source  = "kbst.xyz/catalog/nginx/kustomization"
+#   version = "0.48.1-kbst.0"
+#   configuration = {
+#     apps = {}
+#     ops = {}
+#     loc = {}
+#   }
+# }
 
 module "custom_manifests" {
   providers = {
