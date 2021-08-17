@@ -40,15 +40,6 @@ module "aks_zero" {
   }
 }
 
-provider "kustomization" {
-  # alias reflects cluster module name
-  alias = "aks_zero"
-  
-  # uses kubeconfig output from cluster module
-  kubeconfig_raw = module.aks_zero.kubeconfig
-}
-
-
 module "nginx_ingress" {
   providers = {
     kustomization = kustomization.aks_zero
@@ -61,9 +52,6 @@ module "nginx_ingress" {
     loc = {}
   }
 }
-
-
-
 
 module "custom_manifests" {
   providers = {
