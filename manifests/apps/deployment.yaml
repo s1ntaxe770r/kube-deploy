@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ping-api
+spec:
+  selector:
+    matchLabels:
+      app: ping-api
+  template:
+    metadata:
+      labels:
+        app: ping-api
+    spec:
+      containers:
+      - name: ping-api
+        image: e770r/ekow:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+          - name: REDIS_HOST
+            value: "redis-svc"
+          - name: REDIS_PORT
+            value: "6379"
+  
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6379
+      
