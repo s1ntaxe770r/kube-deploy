@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ping-api
-        image: e770r/ekow:latest
+        image: ghcr.io/s1ntaxe770r/evil-ekow:latest
         resources:
           limits:
             memory: "128Mi"
