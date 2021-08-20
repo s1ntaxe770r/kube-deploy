@@ -53,6 +53,9 @@ module "aks_zero" {
 #   }
 # }
 
+
+
+
 module "custom_manifests" {
   providers = {
     kustomization = kustomization.aks_zero
@@ -61,8 +64,9 @@ module "custom_manifests" {
   version = "0.1.0"
   configuration = {
     apps = {
-      namespace = "apps-${terraform.workspace}"
+      namespace = "app-${terraform.workspace}"
       resources = [
+        "${path.root}/manifests/apps/namespace.yaml",
         "${path.root}/manifests/apps/deployment.yaml",
         "${path.root}/manifests/apps/service.yaml",
         "${path.root}/manifests/apps/ingress.yaml"
@@ -72,7 +76,8 @@ module "custom_manifests" {
         "env" = terraform.workspace
       }
     }
-    ops = {}
+    ops = {
+    }
     loc = {}
   }
 }
